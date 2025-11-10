@@ -159,27 +159,9 @@ def run_once(num_steps: int = 3):
     scorer = Scorer.remote(traj_q, replay_buf)
     generator = Generator.remote(traj_q)
 
-    # Initialize generator weights
-    weights, version = ray.get([learner.get_weights.remote(), learner.get_version.remote()])
-    ray.get(generator.update.remote(weights, version))
+    # TODO: Driver code for the training loop
+    pass
 
-    scorer_run_ref = scorer.run.remote()
-
-    for step in range(num_steps):
-        print(f"\n=== Step {step} ===")
-        state = torch.randn(STATE_DIM)
-
-        # Generate + learn concurrently
-        gen_ref = generator.generate.remote(state)
-        learn_ref = learner.step.remote()
-        _ = ray.get([gen_ref, learn_ref])
-
-        # Sync weights
-        weights, version = ray.get([learner.get_weights.remote(), learner.get_version.remote()])
-        ray.get(generator.update.remote(weights, version))
-
-    ray.get(scorer.stop.remote())
-    ray.get(scorer_run_ref)
 
 
 # ===================== Entry point =====================
