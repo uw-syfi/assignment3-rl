@@ -5,6 +5,7 @@ description = "CS 336 Spring 2025 Assignment 5: Alignment"
 readme = "README.md"
 requires-python = ">=3.11,<3.13"  # Python 3.13 not yet supported for some deps
 dependencies = [
+    "cse599o-basics",
     "accelerate>=1.5.2",
     "alpaca-eval",
     "flash-attn==2.7.4.post1",
@@ -17,7 +18,6 @@ dependencies = [
     "tqdm>=4.67.1",
     "transformers>=4.50.0",
     "typer>=0.15.4",
-    "vllm==0.7.2",
     "wandb>=0.19.8",
     "xopen>=2.0.2",
     "ray>=2.51.1",
@@ -35,6 +35,7 @@ no-build-isolation-package = ["flash-attn"]
 
 [tool.uv.sources]
 alpaca-eval = { git = "https://github.com/nelson-liu/alpaca_eval.git", rev = "forward_kwargs_to_vllm" }
+cse599o-basics = { path = "./cse599o-basics", editable = true }  # Change this path to your assignment1-basics repo you want to use your own implementation!
 
 [tool.pytest.ini_options]
 log_cli = true
