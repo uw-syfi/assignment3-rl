@@ -107,7 +107,7 @@ def grpo_microbatch_train_step(
         policy_log_probs: torch.Tensor,
         response_mask: torch.Tensor,
         gradient_accumulation_steps: int,
-        loss_type: Literal["no_baseline", "reinforce_with_baseline", "grpo_clip"],
+        loss_type: Literal["grpo_clip"],
         raw_rewards: torch.Tensor | None=None,
         advantages: torch.Tensor | None=None,
         old_log_probs: torch.Tensor | None=None,
@@ -125,7 +125,7 @@ def grpo_microbatch_train_step(
         
         gradient_accumulation_steps Number of microbatches per optimizer step.
         
-        loss_type One of "no_baseline", "reinforce_with_baseline", "grpo_clip".
+        loss_type "grpo_clip".
         
         raw_rewards Needed when loss_type == "no_baseline"; shape (batch_size, 1).
         
